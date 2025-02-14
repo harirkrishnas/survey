@@ -1,2 +1,0 @@
-# survey
-Survey for univ
