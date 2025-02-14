@@ -1,6 +1,7 @@
 import SurveyForm from '../../../components/SurveyForm';
 
-export default function SurveyPage({ params }: { params: { stakeholder: string } }) {
+// Mark the page as async so that the return type is a Promise<ReactElement>
+export default async function SurveyPage({ params }: { params: { stakeholder: string } }) {
   const { stakeholder } = params;
   return <SurveyForm stakeholder={stakeholder} />;
 }
