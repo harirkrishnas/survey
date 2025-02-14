@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
@@ -59,7 +60,7 @@ const stakeholderData: Stakeholder[] = [
   }
 ];
 
-export default function Home(): JSX.Element {
+export default function Home(): React.ReactElement {
   return (
     <>
       <Head>

@@ -1,12 +1,17 @@
 import SurveyForm from '../../../components/SurveyForm';
 
+/**
+ * By typing `params` as either a plain object or a PromiseLike object,
+ * we avoid the type error without resorting to `any`.
+ */
 export default async function SurveyPage({
   params,
 }: {
-  // Using any here avoids the conflict between an object and a promise type.
-  params: any;
+  params: { stakeholder: string } | PromiseLike<{ stakeholder: string }>;
 }): Promise<JSX.Element> {
-  // Now we assert that params has a stakeholder property.
-  const { stakeholder } = params as { stakeholder: string };
+  // Await the params so that whether they are provided synchronously (as an object)
+  // or as a promise, we end up with an object having the stakeholder property.
+  const resolvedParams = await Promise.resolve(params);
+  const { stakeholder } = resolvedParams;
   return <SurveyForm stakeholder={stakeholder} />;
 }
