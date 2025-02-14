@@ -13,8 +13,6 @@ import {
   CardContent,
   Link as MuiLink
 } from '@mui/material';
-
-// Import the SurveyFormWrapper (a client component)
 import SurveyFormWrapper from '../components/SurveyFormWrapper';
 
 // Helper function to convert a title to a URL slug.
@@ -71,7 +69,7 @@ export default function Home(): React.ReactElement {
         />
         {/* Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Raleway:wght@400;700&family=Poppins:wght@400;500;700&display=swap"
           rel="stylesheet"
@@ -138,7 +136,8 @@ export default function Home(): React.ReactElement {
               Sampling Concept
             </Typography>
             <Typography variant="body1">
-              Using a stratified sampling strategy combined with the 5W1H framework, we engage diverse participants from various conflict phases for comprehensive insights.
+              Using a stratified sampling strategy combined with the 5W1H framework, we engage diverse participants from various
+              conflict phases for comprehensive insights.
             </Typography>
           </Box>
         </Container>
@@ -173,7 +172,6 @@ export default function Home(): React.ReactElement {
                     <Typography variant="body2" sx={{ mb: 2 }}>
                       <strong>Survey Focus:</strong> {stakeholder.focus}
                     </Typography>
-                    {/* Attend Survey Button */}
                     <Link href={`/survey/${slugify(stakeholder.title)}`} passHref>
                       <Button variant="contained" color="primary" sx={{ textTransform: 'none' }}>
                         Attend Survey
@@ -209,7 +207,7 @@ export default function Home(): React.ReactElement {
           </Box>
         </Container>
 
-        {/* Optionally render the interactive Survey Form via the client-only wrapper */}
+        {/* Optionally render the interactive Survey Form */}
         <SurveyFormWrapper stakeholder="demo-stakeholder" />
       </main>
 
