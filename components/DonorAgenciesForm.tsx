@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   Container,
@@ -60,7 +60,12 @@ export default function DonorAgenciesForm({ stakeholder }: DonorAgenciesFormProp
   const [openThankYou, setOpenThankYou] = useState(false);
   const steps = ["Introduction & Consent", "Survey Questions", "Production Canvas Design"];
 
-  const { control, handleSubmit, register } = useForm<FormData>({
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors }
+  } = useForm<FormData>({
     defaultValues: { consentParticipate: false, consentAnonymity: false, zone: "" }
   });
 
@@ -147,15 +152,35 @@ export default function DonorAgenciesForm({ stakeholder }: DonorAgenciesFormProp
             <Divider sx={{ mb: 2 }} />
             <TextField {...register("agencyName")} label="Agency/Institution Name" fullWidth sx={{ mb: 2 }} />
             <TextField {...register("contactPerson")} label="Contact Person" fullWidth sx={{ mb: 2 }} />
-            <TextField {...register("role", { required: true })} label="Your Role" fullWidth sx={{ mb: 2 }} error={!!undefined} helperText={undefined ? "Required" : ""} />
-            <TextField {...register("yearsOfExperience", { valueAsNumber: true })} type="number" label="Years of Funding Experience" fullWidth sx={{ mb: 2 }} />
+            <TextField
+              {...register("role", { required: true })}
+              label="Your Role"
+              fullWidth
+              sx={{ mb: 2 }}
+              error={!!errors.role}
+              helperText={errors.role ? "Required" : ""}
+            />
+            <TextField
+              {...register("yearsOfExperience", { valueAsNumber: true })}
+              type="number"
+              label="Years of Funding Experience"
+              fullWidth
+              sx={{ mb: 2 }}
+            />
             <TextField {...register("investmentCriteria")} label="Key Investment Criteria" fullWidth sx={{ mb: 2 }} multiline rows={2} />
             <Controller
               name="zone"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <TextField {...field} select label="Select Operational Zone" fullWidth helperText="Select your conflict exposure zone" sx={{ mb: 2 }}>
+                <TextField
+                  {...field}
+                  select
+                  label="Select Operational Zone"
+                  fullWidth
+                  helperText="Select your conflict exposure zone"
+                  sx={{ mb: 2 }}
+                >
                   <MenuItem value="no-conflict">No Conflict Zone</MenuItem>
                   <MenuItem value="pre-conflict">Pre-Conflict Zone</MenuItem>
                   <MenuItem value="active-conflict">Active Conflict Zone</MenuItem>
@@ -169,18 +194,69 @@ export default function DonorAgenciesForm({ stakeholder }: DonorAgenciesFormProp
               <MenuItem value="social-entrepreneurship">Social Entrepreneurship</MenuItem>
               <MenuItem value="other">Other</MenuItem>
             </TextField>
-            <TextField {...register("processEfficiency", { valueAsNumber: true })} type="number" label="Rate Process Efficiency (1-5)" fullWidth sx={{ mb: 2 }} select>
-              {[1, 2, 3, 4, 5].map((num) => <MenuItem key={num} value={num}>{num}</MenuItem>)}
+            <TextField
+              {...register("processEfficiency", { valueAsNumber: true })}
+              type="number"
+              label="Rate Process Efficiency (1-5)"
+              fullWidth
+              sx={{ mb: 2 }}
+              select
+            >
+              {[1, 2, 3, 4, 5].map((num) => (
+                <MenuItem key={num} value={num}>
+                  {num}
+                </MenuItem>
+              ))}
             </TextField>
-            <TextField {...register("digitalInnovationRating", { valueAsNumber: true })} type="number" label="Digital Innovation Rating (1-5)" fullWidth sx={{ mb: 2 }} select>
-              {[1, 2, 3, 4, 5].map((num) => <MenuItem key={num} value={num}>{num}</MenuItem>)}
+            <TextField
+              {...register("digitalInnovationRating", { valueAsNumber: true })}
+              type="number"
+              label="Digital Innovation Rating (1-5)"
+              fullWidth
+              sx={{ mb: 2 }}
+              select
+            >
+              {[1, 2, 3, 4, 5].map((num) => (
+                <MenuItem key={num} value={num}>
+                  {num}
+                </MenuItem>
+              ))}
             </TextField>
-            <TextField {...register("impactAssessment", { valueAsNumber: true })} type="number" label="Impact Assessment (1-5)" fullWidth sx={{ mb: 2 }} select>
-              {[1, 2, 3, 4, 5].map((num) => <MenuItem key={num} value={num}>{num}</MenuItem>)}
+            <TextField
+              {...register("impactAssessment", { valueAsNumber: true })}
+              type="number"
+              label="Impact Assessment (1-5)"
+              fullWidth
+              sx={{ mb: 2 }}
+              select
+            >
+              {[1, 2, 3, 4, 5].map((num) => (
+                <MenuItem key={num} value={num}>
+                  {num}
+                </MenuItem>
+              ))}
             </TextField>
-            <TextField {...register("coordinationMechanisms")} label="Inter-Agency Coordination (Describe)" fullWidth sx={{ mb: 2 }} multiline rows={2} />
-            <TextField {...register("overallSatisfaction", { valueAsNumber: true })} type="number" label="Overall Satisfaction (1-5)" fullWidth sx={{ mb: 2 }} select>
-              {[1, 2, 3, 4, 5].map((num) => <MenuItem key={num} value={num}>{num}</MenuItem>)}
+            <TextField
+              {...register("coordinationMechanisms")}
+              label="Inter-Agency Coordination (Describe)"
+              fullWidth
+              sx={{ mb: 2 }}
+              multiline
+              rows={2}
+            />
+            <TextField
+              {...register("overallSatisfaction", { valueAsNumber: true })}
+              type="number"
+              label="Overall Satisfaction (1-5)"
+              fullWidth
+              sx={{ mb: 2 }}
+              select
+            >
+              {[1, 2, 3, 4, 5].map((num) => (
+                <MenuItem key={num} value={num}>
+                  {num}
+                </MenuItem>
+              ))}
             </TextField>
             <TextField {...register("additionalFeedback")} label="Additional Feedback" fullWidth sx={{ mb: 4 }} multiline rows={2} />
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
